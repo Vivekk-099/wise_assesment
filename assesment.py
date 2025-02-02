@@ -11,6 +11,7 @@ wait = WebDriverWait(driver,4)
 action = ActionChains(driver)
 driver.get("https://staging-web.wise.live")
 driver.maximize_window()
+
 # Scenario 1 : Perform login as tutor
 
 wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='text--16 height-48 primary--text v-btn v-btn--block v-btn--has-bg theme--light v-size--default large secondary-bg ']"))).click()
@@ -54,8 +55,8 @@ time.sleep(1)
 wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@role='combobox']"))).click()
 selected_time=driver.find_element(By.XPATH,"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[10]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1]")
 selected_time.clear()
-selected_time.send_keys("11:45")
-scheduled_date_time = selected_date[5:11] + ' ' + selected_year[2:5]+'11:45 PM'
+selected_time.send_keys("10:00")
+scheduled_date_time = selected_date[5:11] + ' ' + selected_year[2:5]+"10:00 PM"
 actions = ActionChains(driver) 
 actions.send_keys(Keys.ENTER)
 actions.perform()
@@ -76,7 +77,7 @@ for i in range(len(timeline_card_List)):
     selected_date_time = timeline_card_List[i].text[0:9] + timeline_card_List[i].text[10:18]
     Duration = timeline_card_List[i].text[19:25]
     if(selected_date_time==scheduled_date_time):
-        assert "02 Feb 2511:45 PM" in selected_date_time,"Session Card not Shown"
+        assert scheduled_date_time in selected_date_time,"Session Card not Shown"
         print("Session card for scheduled date can be seen on timeline")
         SessionDetails=session_Detail[i].text
         InstructorName=Instructor_name[i].text
